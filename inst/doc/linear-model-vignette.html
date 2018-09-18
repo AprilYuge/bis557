@@ -140,16 +140,29 @@ $(document).ready(function () {
 <p>The linear model is the “hello world” of machine learning models.</p>
 <pre class="r"><code>library(bis557)
 fit &lt;- linear_model(Sepal.Length ~ ., iris)
-fit</code></pre>
+summary(fit)</code></pre>
 <pre><code>## 
 ## Call:
-## &quot;linear_model(formula = Sepal.Length ~ ., data = lm_patho&quot;
+## linear_model(formula = Sepal.Length ~ ., data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.79424 -0.21874  0.00899  0.20255  0.73103 
 ## 
 ## Coefficients:
-##       (Intercept)        Sepal.Width       Petal.Length  
-##            2.1713             0.4959             0.8292  
-##       Petal.Width  Speciesversicolor   Speciesvirginica  
-##           -0.3152            -0.7236            -1.0235</code></pre>
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        2.17127    0.27979   7.760 1.43e-12 ***
+## Sepal.Width        0.49589    0.08607   5.761 4.87e-08 ***
+## Petal.Length       0.82924    0.06853  12.101  &lt; 2e-16 ***
+## Petal.Width       -0.31516    0.15120  -2.084  0.03889 *  
+## Speciesversicolor -0.72356    0.24017  -3.013  0.00306 ** 
+## Speciesvirginica  -1.02350    0.33373  -3.067  0.00258 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3068 on 144 degrees of freedom
+## Multiple R-squared:  0.8673, Adjusted R-squared:  0.8627 
+## F-statistic: 188.3 on 5 and 144 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 
 

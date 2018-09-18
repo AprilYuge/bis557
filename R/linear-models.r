@@ -6,26 +6,38 @@
 #' @param data a data.frame
 #' @return An lm object
 #' @importFrom stats lm
+#' @importFrom stats model.matrix
+#' @importFrom stats model.frame
 #' @examples
 #' fit <- linear_model(Sepal.Length ~., iris)
 #' summary(fit)
 #' @export
 linear_model <- function(formula, data) {
+  # To get the design matrix X
   x <- model.matrix(formula,data)
-  # To get the dependent variable
-  cnames <- colnames(data)
-  depvar <- all.vars(formula)[1]
-  tag <- cnames == depvar
-  y <- data[,tag]
+  # To get the dependent variable y
+  model <- model.frame(formula,data) 
+  y <- model[,1]
+  #QR decomposition of design matrix
   qrr <- qr(x)
-  co <- qr.coef(qrr,y)
-  re <- qr.resid(qrr,y)
-  call <- paste0("linear_model(formula = ", deparse(formula), ", data = lm_patho")
+  qrr$tol <- 1e-07
+  #Terms of the model
+  tm <- attr(model,"terms")
+  #Form the list
   li <- list()
-  li$call <- call
-  li$coefficients <- co
-  li$residuals <- re
+    li$coefficients <- qr.coef(qrr,y)
+  li$residuals <- qr.resid(qrr,y)
+  li$effects <- NULL
+  li$rank <- qrr$rank
+  li$fitted.values <- qr.fitted(qrr,y)
+  li$assign <- attr(x,"assign")
   li$qr <- qrr
+  li$df.residual <- nrow(x)-ncol(x)
+  li$contrasts <- attr(x,"contrasts")
+  li$xlevels <- .getXlevels(tm,model)
+  li$call <- match.call()
+  li$terms <- tm
+  li$model <- model
   class(li) <- "lm"
   li
 }
