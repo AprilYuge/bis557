@@ -12,5 +12,5 @@ model, and gives the coefficiens and residuals. You can use it like this:
 ```{R}
 library(bis557)
 fit <- linear_model(Sepal.Length ~., iris)
-fit
+summary(fit)
 ```
