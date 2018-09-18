@@ -13,33 +13,44 @@
 #' summary(fit)
 #' @export
 linear_model <- function(formula, data) {
-  # To get the design matrix X
+  # Get the design matrix X
   x <- model.matrix(formula,data)
   
-  # To get the dependent variable y
+  # Get the dependent variable y
   model <- model.frame(formula,data) 
   y <- model[,1]
   
-  #QR decomposition of design matrix
+  # QR decomposition of design matrix
   qrr <- qr(x)
   qrr$tol <- 1e-07
   
-  #Terms of the model
-  tm <- attr(model,"terms")
+  # Generate coefficients
+  co <- qr.coef(qrr,y)
   
-  #Effects of the model
+  # Generate residuals
+  re <- qr.resid(qrr,y)
+  names(re) <- 1:length(re)
+  
+  # Generate effects
   eff <- qr.qty(qrr,y)
   nameeff <- colnames(x)
   nameeff <- nameeff[qrr$pivot[1:qrr$rank]]
   names(eff) <- c(nameeff, rep("", length(eff)-length(nameeff)))
   
+  # Generate fitted values
+  fit <- qr.fitted(qrr,y)
+  names(fit) <- 1: length(fit)
+  
+  #Terms of the model
+  tm <- attr(model,"terms")
+  
   #Form the list
   li <- list()
-    li$coefficients <- qr.coef(qrr,y)
-  li$residuals <- qr.resid(qrr,y)
+  li$coefficients <- co
+  li$residuals <- re
   li$effects <- eff
   li$rank <- qrr$rank
-  li$fitted.values <- qr.fitted(qrr,y)
+  li$fitted.values <- fit
   li$assign <- attr(x,"assign")
   li$qr <- qrr
   li$df.residual <- nrow(x)-qrr$rank
