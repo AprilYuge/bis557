@@ -1,9 +1,9 @@
 Package: bis557
 Type: Package
-Title: What the package does (short line)
+Title: All packages here are howework for bis557
 Version: 0.1.0
-Author: Michael Kane
-Maintainer: Michael Kane <michael.kane@yale.edu>
+Author: Michael Kane, Yuge Wang
+Maintainer: Michael Kane <michael.kane@yale.edu>, Yuge Wang <yuge.wang@yale.edu>
 Description: Assignments, code, and digital artifacts for BIS 557.
 License: Apache License 2.0
 RoxygenNote: 6.1.0
