@@ -8,7 +8,7 @@
 #' @importFrom stats model.matrix
 #' @importFrom stats model.frame
 #' @examples
-#' ridge_fit <- ridge_reg(Sepal.Length ~., iris)
+#' ridge_fit <- ridge_reg(Sepal.Length ~., iris, lambda = 1)
 #' ridge_fit$coef
 #' @export
 ridge_reg <- function(formula, data, lambda) {
