@@ -30,24 +30,20 @@ fit_ridge <- ridge_reg(y~. -1, data_scale, lambda = 1)
 fit_ridge$coef
 ```
 
-If lambda is unknown, we can divide the data into training and testing data sets, and find the optimal lambda that gives us the smallest out-of-sample mean square error on the testing data set.  
+If lambda is unknown, we can use the training data set to train the ridge regression model, and find the optimal lambda that gives us the smallest out-of-sample mean square error on the testing data set.  
 
 Example codes:  
 
 ```{r, fig.width = 5, fig.height = 4, fig.align = 'center'}
-# Set the data for training and testing respectively
-row_num <- nrow(ridge_train)
-set.seed(1234)
-test_id <- sample.int(row_num, row_num/4)
-train_id <- setdiff(1:row_num, test_id)
-test <- ridge_train[test_id, ]
-test_scale <- scale(test)
-train <- ridge_train[train_id, ]
-train_scale <- as.data.frame(scale(train))
+# Scale the training and testing data sets respectively
+data("ridge_train")
+train_scale <- as.data.frame(scale(ridge_train))
+data("ridge_test")
+test_scale <- scale(ridge_test)
 
 # Train models and calculate MSE on the testing data set for different lambdas
 n <- 1000
-lambda <- exp(seq(0, 4, length.out = n))
+lambda <- exp(seq(1, 5, length.out = n))
 mse <- rep(0, n)
 for (i in 1:n){
   fit_ridge <- ridge_reg(y ~. -1, lambda[i], train_scale)

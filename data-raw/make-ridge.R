@@ -1,5 +1,5 @@
 setwd("F:/Yale/Computational_Statistics/bis557")
 ridge_test <- read.csv("./data-raw/ridge_test.csv")
-ridge_train <- read.csv("./data-raw/ridge_test.csv")
+ridge_train <- read.csv("./data-raw/ridge_train.csv")
 save(ridge_test, file = "./data/ridge_test.rda")
 save(ridge_train, file = "./data/ridge_train.rda")
