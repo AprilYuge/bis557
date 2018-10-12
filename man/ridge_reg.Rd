@@ -4,14 +4,14 @@
 \alias{ridge_reg}
 \title{Fit a ridge regression model}
 \usage{
-ridge_reg(formula, data, lambda)
+ridge_reg(formula, lambda, data)
 }
 \arguments{
 \item{formula}{a formula}
 
-\item{data}{a data.frame}
-
 \item{lambda}{a lambda value for penalty}
+
+\item{data}{a data.frame}
 }
 \value{
 A ridge_reg object
