@@ -20,6 +20,7 @@ A ridge_reg object
 This function passes parameters to the ridge_reg function.
 }
 \examples{
-ridge_fit <- ridge_reg(Sepal.Length ~., iris, lambda = 1)
+iris_scale <- as.data.frame(scale(iris))
+ridge_fit <- ridge_reg(Sepal.Length ~. -1, iris_scale, lambda = 1)
 ridge_fit$coef
 }
