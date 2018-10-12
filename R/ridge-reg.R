@@ -11,19 +11,21 @@
 #' ridge_fit <- ridge_reg(Sepal.Length ~., iris, lambda = 1)
 #' ridge_fit$coef
 #' @export
-ridge_reg <- function(formula, data, lambda) {
+ridge_reg <- function(formula, lambda, data) {
   
   # Get the scaled design matrix X
-  x <- model.matrix(formula, data)[, -1]
-  n <- nrow(x)
-  p <- ncol(x)
-  x <- x - matrix(rep(1,n), nrow = n) %*% colMeans(x)
-  xscale <- (rep(1/n, n) %*% x^2)^0.5
-  x <- x/rep(xscale, rep(n, p))
+  x <- model.matrix(formula, data)
+  # if (colnames(x)[1] == "(Intercept)")
+  #   x <- x[,-1]
+  # n <- nrow(x)
+  # p <- ncol(x)
+  # x <- x - matrix(rep(1,n), nrow = n) %*% colMeans(x)
+  # xscale <- (rep(1/n, n) %*% x^2)^0.5
+  # x <- x/rep(xscale, rep(n, p))
   
   # Get the scaled dependent variable y
   y <- model.frame(formula, data)[, 1]
-  y <- y-mean(y)
+  # y <- y-mean(y)
   
   # Singular value decomposition of X
   svd_x <- svd(x)
