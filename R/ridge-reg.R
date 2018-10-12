@@ -8,8 +8,9 @@
 #' @importFrom stats model.matrix
 #' @importFrom stats model.frame
 #' @examples
-#' iris_scale <- as.data.frame(scale(iris))
-#' ridge_fit <- ridge_reg(Sepal.Length ~. -1, iris_scale, lambda = 1)
+#' data("ridge_train")
+#' data_scale <- as.data.frame(scale(ridge_train))
+#' ridge_fit <- ridge_reg(y ~. -1, data_scale, lambda = 1)
 #' ridge_fit$coef
 #' @export
 ridge_reg <- function(formula, lambda, data) {
