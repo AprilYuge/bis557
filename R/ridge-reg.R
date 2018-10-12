@@ -8,7 +8,8 @@
 #' @importFrom stats model.matrix
 #' @importFrom stats model.frame
 #' @examples
-#' ridge_fit <- ridge_reg(Sepal.Length ~., iris, lambda = 1)
+#' iris_scale <- as.data.frame(scale(iris))
+#' ridge_fit <- ridge_reg(Sepal.Length ~. -1, iris_scale, lambda = 1)
 #' ridge_fit$coef
 #' @export
 ridge_reg <- function(formula, lambda, data) {
@@ -33,7 +34,7 @@ ridge_reg <- function(formula, lambda, data) {
   v <- svd_x$v
   d <- svd_x$d
   
-  # Calculate the coeficients
+  # Calculate coefficients
   co <- v %*% diag(d/(d^2+lambda)) %*% t(u) %*% y
   rownames(co) <- colnames(x)
   
