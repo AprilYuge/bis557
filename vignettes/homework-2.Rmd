@@ -43,7 +43,7 @@ test_scale <- scale(ridge_test)
 
 # Train models and calculate MSE on the testing data set for different lambdas
 n <- 1000
-lambda <- exp(seq(1, 5, length.out = n))
+lambda <- exp(seq(0, 5, length.out = n))
 mse <- rep(0, n)
 for (i in 1:n){
   fit_ridge <- ridge_reg(y ~. -1, lambda[i], train_scale)
