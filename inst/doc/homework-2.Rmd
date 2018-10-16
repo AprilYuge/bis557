@@ -1,0 +1,60 @@
+---
+title: "Ridge Regression Model"
+author: "Yuge Wang"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Ridge Regression Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## The ridge_reg function
+
+The ridge regression model can address multiple regression suffering from collinearity by penalizing squared $l_2$ norm of the coefficient vector.  
+
+For a given penalizing parameter lambda, we can use ridge_reg function to get coefficients of ridge regression model:  
+
+```{r}
+library(bis557)
+data("ridge_train")
+data_scale <- as.data.frame(scale(ridge_train))
+fit_ridge <- ridge_reg(y~. -1, data_scale, lambda = 1)
+fit_ridge$coef
+```
+
+If lambda is unknown, we can use the training data set to train the ridge regression model, and find the optimal lambda that gives us the smallest out-of-sample mean square error on the testing data set.  
+
+Example codes:  
+
+```{r, fig.width = 5, fig.height = 4, fig.align = 'center'}
+# Scale the training and testing data sets respectively
+data("ridge_train")
+train_scale <- as.data.frame(scale(ridge_train))
+data("ridge_test")
+test_scale <- scale(ridge_test)
+
+# Train models and calculate MSE on the testing data set for different lambdas
+n <- 1000
+lambda <- exp(seq(0, 5, length.out = n))
+mse <- rep(0, n)
+for (i in 1:n){
+  fit_ridge <- ridge_reg(y ~. -1, lambda[i], train_scale)
+  yhat <- test_scale[,-1] %*% fit_ridge$coef
+  mse[i] <- mean((test_scale[, 1]-yhat)^2)
+} 
+plot(log(lambda), mse)
+```
+
+From the plot above, we can see out-of-sample MSE varries as lambda increases. The optimal lambda in our example can be calculated as follows:  
+
+```{r}
+lambda[which.min(mse)]
+```

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Yuge Wang" />
+
+<meta name="date" content="2018-10-15" />
+
+<title>Ridge Regression Model</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Ridge Regression Model</h1>
+<h4 class="author"><em>Yuge Wang</em></h4>
+<h4 class="date"><em>2018-10-15</em></h4>
+
+
+
+<div id="the-ridge_reg-function" class="section level2">
+<h2>The ridge_reg function</h2>
+<p>The ridge regression model can address multiple regression suffering from collinearity by penalizing squared <span class="math inline">\(l_2\)</span> norm of the coefficient vector.</p>
+<p>For a given penalizing parameter lambda, we can use ridge_reg function to get coefficients of ridge regression model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bis557)
+<span class="kw">data</span>(<span class="st">&quot;ridge_train&quot;</span>)
+data_scale &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">scale</span>(ridge_train))
+fit_ridge &lt;-<span class="st"> </span><span class="kw">ridge_reg</span>(y<span class="op">~</span>. <span class="op">-</span><span class="dv">1</span>, data_scale, <span class="dt">lambda =</span> <span class="dv">1</span>)
+fit_ridge<span class="op">$</span>coef
+<span class="co">#&gt;           [,1]</span>
+<span class="co">#&gt; x1  0.31097574</span>
+<span class="co">#&gt; x2 -0.28232743</span>
+<span class="co">#&gt; x3  0.04855993</span>
+<span class="co">#&gt; x4  0.03431339</span></code></pre></div>
+<p>If lambda is unknown, we can use the training data set to train the ridge regression model, and find the optimal lambda that gives us the smallest out-of-sample mean square error on the testing data set.</p>
+<p>Example codes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scale the training and testing data sets respectively</span>
+<span class="kw">data</span>(<span class="st">&quot;ridge_train&quot;</span>)
+train_scale &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">scale</span>(ridge_train))
+<span class="kw">data</span>(<span class="st">&quot;ridge_test&quot;</span>)
+test_scale &lt;-<span class="st"> </span><span class="kw">scale</span>(ridge_test)
+
+<span class="co"># Train models and calculate MSE on the testing data set for different lambdas</span>
+n &lt;-<span class="st"> </span><span class="dv">1000</span>
+lambda &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dt">length.out =</span> n))
+mse &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, n)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n){
+  fit_ridge &lt;-<span class="st"> </span><span class="kw">ridge_reg</span>(y <span class="op">~</span>. <span class="op">-</span><span class="dv">1</span>, lambda[i], train_scale)
+  yhat &lt;-<span class="st"> </span>test_scale[,<span class="op">-</span><span class="dv">1</span>] <span class="op">%*%</span><span class="st"> </span>fit_ridge<span class="op">$</span>coef
+  mse[i] &lt;-<span class="st"> </span><span class="kw">mean</span>((test_scale[, <span class="dv">1</span>]<span class="op">-</span>yhat)<span class="op">^</span><span class="dv">2</span>)
+} 
+<span class="kw">plot</span>(<span class="kw">log</span>(lambda), mse)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>From the plot above, we can see out-of-sample MSE varries as lambda increases. The optimal lambda in our example can be calculated as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lambda[<span class="kw">which.min</span>(mse)]
+<span class="co">#&gt; [1] 26.13468</span></code></pre></div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
