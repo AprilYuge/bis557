@@ -75,7 +75,7 @@ legend("topright", legend = c("kernel density","true density"),
        lty = c(1, 1), col = c("black", "red"), cex = 0.8)
 title("N(0,1), h=0.5")
 
-#h=1
+#h=2
 den <- kernel_density(x, h = 2, x_new)
 plot(x_new, den, type = "l", ylim = c(0, 0.5), ylab = "density", xlab = "")
 trueden <- dnorm(x_new, 0, 1)

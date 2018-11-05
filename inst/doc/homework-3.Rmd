@@ -71,7 +71,7 @@ legend("topright", legend = c("kernel density","true density"),
 title("Gamma Distribution Gamma(2,2)")
 ```
 
-And then, let's see how the function performs under different bandwiths h. Here, we use normal distribution N(0,1) as as example.
+And then, let's see how the function performs under different bandwiths h. Here, we use normal distribution N(0,1) as an example.
 
 ```{r}
 set.seed(2222)
@@ -96,7 +96,7 @@ legend("topright", legend = c("kernel density","true density"),
        lty = c(1, 1), col = c("black", "red"), cex = 0.8)
 title("N(0,1), h=0.5")
 
-#h=1
+#h=2
 den <- kernel_density(x, h = 2, x_new)
 plot(x_new, den, type = "l", ylim = c(0, 0.5), ylab = "density", xlab = "")
 trueden <- dnorm(x_new, 0, 1)
@@ -112,7 +112,7 @@ title("N(0,1), h=2")
 ![](page2.jpg){width=80%}
 
 ## P120 Q6
-The KKT condition for glmnet when $0<\alpha<=1$ is $\frac{1}{n}\sum_{i=1}^n(x_{il}(y_i-\sum_{j=1}^px_{ij}\hat{b_j}))-\lambda(1-\alpha)\beta_l=\lambda\alpha s_l$  
+The KKT condition for glmnet when $0<\alpha\le1$ is $\frac{1}{n}\sum_{i=1}^n(x_{il}(y_i-\sum_{j=1}^px_{ij}\hat{b_j}))-\lambda(1-\alpha)\hat{b_l}=\lambda\alpha s_l$  
 
 for $l=1, 2, ..., p$ where  
 \begin{equation}
@@ -127,7 +127,7 @@ s_l \in
 \end{equation}
 
 
-The function "lasso_reg_with_screening" shown below accepts a new lambda, a design matrix X, a response vector y, an current coefficient vector b, the penalty term lambda, and alpha, and it returns a logical vector indicating all the current non-zero coefficients which violate the KKT condition.
+The function "lasso_reg_with_screening" shown below accepts a design matrix X, a response vector y, a current coefficient vector b, a new penalty term lambda, and alpha, and it returns a logical vector indicating all the current non-zero coefficients which violate the KKT condition.
 
 ```{r}
 lasso_reg_with_screening <- function(X, y, b, lambda, alpha){
