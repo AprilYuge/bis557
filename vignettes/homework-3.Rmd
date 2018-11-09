@@ -127,7 +127,7 @@ s_l \in
 \end{equation}
 
 
-The function "lasso_reg_with_screening" shown below accepts a design matrix X, a response vector y, a current coefficient vector b, a new penalty term lambda, and alpha, and it returns a logical vector indicating all the current non-zero coefficients which violate the KKT condition.
+The function "lasso_reg_with_screening" shown below accepts a design matrix X, a response vector y, a current coefficient vector b, a new penalty term lambda, and alpha, and it returns a logical vector indicating all the current zero coefficients which violate the KKT condition.
 
 ```{r}
 lasso_reg_with_screening <- function(X, y, b, lambda, alpha){
