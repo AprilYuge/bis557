@@ -3,7 +3,7 @@
 \docType{methods}
 \name{t,sparse.matrix-method}
 \alias{t,sparse.matrix-method}
-\title{Create a method.}
+\title{Define transpose of sparse.matrix object.}
 \usage{
 \S4method{t}{sparse.matrix}(x)
 }
@@ -11,5 +11,5 @@
 \item{x}{a sparse.matrix object}
 }
 \description{
-A method.
+A method for sparse.matrix transpose.
 }

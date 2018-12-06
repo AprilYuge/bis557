@@ -2,7 +2,7 @@
 % Please edit documentation in R/sparse-matrix.R
 \name{sparse.matrix}
 \alias{sparse.matrix}
-\title{Create a function.}
+\title{Create a function called sparse.matrix.}
 \usage{
 sparse.matrix(i, j, x, dims)
 }

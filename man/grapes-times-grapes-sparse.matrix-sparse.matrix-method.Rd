@@ -3,7 +3,7 @@
 \docType{methods}
 \name{\%*\%,sparse.matrix,sparse.matrix-method}
 \alias{\%*\%,sparse.matrix,sparse.matrix-method}
-\title{Create a method.}
+\title{Define multiplication of sparse.matrix object.}
 \usage{
 \S4method{\%*\%}{sparse.matrix,sparse.matrix}(x, y)
 }
@@ -13,5 +13,5 @@
 \item{y}{a sparse.matrix object}
 }
 \description{
-A method.
+A method for sparse.matrix multiplication.
 }

@@ -3,7 +3,7 @@
 \docType{methods}
 \name{+,sparse.matrix,sparse.matrix-method}
 \alias{+,sparse.matrix,sparse.matrix-method}
-\title{Create a method.}
+\title{Define addition of sparse.matrix object.}
 \usage{
 \S4method{+}{sparse.matrix,sparse.matrix}(e1, e2)
 }
@@ -13,5 +13,5 @@
 \item{e2}{a sparse.matrix object}
 }
 \description{
-A method.
+A method for sparse.matrix addition.
 }

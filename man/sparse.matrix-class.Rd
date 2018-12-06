@@ -3,8 +3,7 @@
 \docType{class}
 \name{sparse.matrix-class}
 \alias{sparse.matrix-class}
-\title{Create a new class and function both called "sparse.matrix", and define addition, 
-multiplication, and transpose of it.}
+\title{Create a new class called "sparse.matrix".}
 \description{
 I set a new class called "sparse.matrix".
 }
