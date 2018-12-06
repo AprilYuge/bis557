@@ -107,11 +107,11 @@ sparse_multiply <- function(x, y){
 setMethod("%*%", signature(x = "sparse.matrix", y = "sparse.matrix"), sparse_multiply)
 
 # Function sparse_tranpose can transpose a sparse matrix.
-sparse_tranpose <- function(x){
+sparse_transpose <- function(x){
   dims <- c(x@dims[2], x@dims[1])
   z <- sparse.matrix(i = x@j, j = x@i, x = x@x, dims = dims)
 }
 
 # Set a method "t" using function sparse_transpose.
-setMethod("t", "sparse.matrix", sparse_tranpose)
+setMethod("t", "sparse.matrix", sparse_transpose)
 

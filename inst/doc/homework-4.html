@@ -12,7 +12,7 @@
 
 <meta name="author" content="Yuge Wang" />
 
-<meta name="date" content="2018-11-23" />
+<meta name="date" content="2018-12-05" />
 
 <title>Homework 4</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Homework 4</h1>
 <h4 class="author"><em>Yuge Wang</em></h4>
-<h4 class="date"><em>2018-11-23</em></h4>
+<h4 class="date"><em>2018-12-05</em></h4>
 
 
 
@@ -199,13 +199,13 @@ sparse_multiply &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <span class="kw">setMethod</span>(<span class="st">&quot;%*%&quot;</span>, <span class="kw">signature</span>(<span class="dt">x =</span> <span class="st">&quot;sparse.matrix&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;sparse.matrix&quot;</span>), sparse_multiply)
 
 <span class="co"># Function sparse_tranpose can transpose a sparse matrix.</span>
-sparse_tranpose &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+sparse_transpose &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   dims &lt;-<span class="st"> </span><span class="kw">c</span>(x<span class="op">@</span>dims[<span class="dv">2</span>], x<span class="op">@</span>dims[<span class="dv">1</span>])
   z &lt;-<span class="st"> </span><span class="kw">sparse.matrix</span>(<span class="dt">i =</span> x<span class="op">@</span>j, <span class="dt">j =</span> x<span class="op">@</span>i, <span class="dt">x =</span> x<span class="op">@</span>x, <span class="dt">dims =</span> dims)
 }
 
 <span class="co"># Set a method &quot;t&quot; using function sparse_transpose.</span>
-<span class="kw">setMethod</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;sparse.matrix&quot;</span>, sparse_tranpose)</code></pre></div>
+<span class="kw">setMethod</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;sparse.matrix&quot;</span>, sparse_transpose)</code></pre></div>
 </div>
 
 
