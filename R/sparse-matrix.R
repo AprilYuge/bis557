@@ -1,5 +1,4 @@
-#' Create a new class and function both called "sparse.matrix", and define addition, 
-#' multiplication, and transpose of it. 
+#' Create a new class called "sparse.matrix".
 #' 
 #' @description I set a new class called "sparse.matrix".
 #' @slot i a vector indicating row number with non-zero elements
@@ -10,7 +9,8 @@
 setClass("sparse.matrix", representation(i = "integer", 
                             j = "integer", dims = "integer", x = "numeric"))
 
-#' Create a function.
+#' Create a function called sparse.matrix.
+#' 
 #' @description A function to return "sparse.matrix" object.
 #' @param i a vector indicating row number with non-zero elements
 #' @param j a vector indicating columnn number with non-zero elements
@@ -35,8 +35,9 @@ sparse.matrix <- function(i, j, x, dims){
   return(a)
 }
 
-#' Create a method.
-#' @description A method.
+#' Define addition of sparse.matrix object. 
+#' 
+#' @description A method for sparse.matrix addition.
 #' @param e1 a sparse.matrix object
 #' @param e2 a sparse.matrix object
 #' @importFrom methods new
@@ -54,8 +55,9 @@ setMethod("+", signature(e1 = "sparse.matrix", e2 = "sparse.matrix"),
             return(z)
           })
 
-#' Create a method.
-#' @description A method.
+#' Define multiplication of sparse.matrix object. 
+#' 
+#' @description A method for sparse.matrix multiplication.
 #' @param x a sparse.matrix object
 #' @param y a sparse.matrix object
 #' @importFrom methods new
@@ -77,8 +79,9 @@ setMethod("%*%", signature(x = "sparse.matrix", y = "sparse.matrix"),
             return(m)
           })
 
-#' Create a method.
-#' @description A method.
+#' Define transpose of sparse.matrix object. 
+#' 
+#' @description A method for sparse.matrix transpose.
 #' @param x a sparse.matrix object
 #' @importFrom methods new
 setMethod("t", "sparse.matrix", 
