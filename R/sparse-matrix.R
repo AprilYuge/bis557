@@ -1,27 +1,26 @@
 #' Create a new class called "sparse.matrix", and define addition, multiplication, and transpose of it. 
-#'
-#' @description I set a new class called "sparse.matrix", and created a function also called 
-#' sparse.matrix to return a "sparse.matrix" object. Then, I created functions sparse_add, 
-#' sparse_multiply and sparse_tranpose to do sparse matrix operations. At last, I set methods 
-#' "+", "%*%" and "t" by using the three functions.
+#' 
+#' @rdname sparse-matrix-class
+#' @description I set a new class called "sparse.matrix".
+#' @slot i a vector indicating row number with non-zero elements
+#' @slot j a vector indicating columnn number with non-zero elements
+#' @slot x a vector indicating the value of each non-zero element
+#' @slot dims a vector indicating dimensions of the matrix
+#' @export
+setClass("sparse.matrix", representation(i = "integer", j = "integer", dims = "integer", x = "numeric"))
+
+#' @name sparse-matrix-function
+#' @rdname sparse-matrix-function
+#' @description I created a function also called sparse.matrix to return 
+#' a "sparse.matrix" object.
 #' @param i a vector indicating row number with non-zero elements
 #' @param j a vector indicating columnn number with non-zero elements
 #' @param x a vector indicating the value of each non-zero element
 #' @param dims a vector indicating dimensions of the matrix
-#' @param e1 a sparse.matrix
-#' @param e2 a sparse.matrix
-#' @param x a sparse.matrix
-#' @param y a sparse.matrix
 #' @return A sparse.matrix object
-#' @importFrom methods new
 #' @examples
 #' sm <- sparse.matrix(i = c(1, 2), j = c(1, 1), x = c(1, 1), dims = c(2, 2))
 #' sm
-#' sm + sm
-#' sm %*% sm
-#' t(sm)
-#' @export
-setClass("sparse.matrix", representation(i = "integer", j = "integer", dims = "integer", x = "numeric"))
 #' @export
 sparse.matrix <- function(i, j, x, dims){
   i <- as.integer(i)
@@ -39,6 +38,17 @@ sparse.matrix <- function(i, j, x, dims){
   a <- new("sparse.matrix", i = ma$i ,j = ma$j ,dims = dims, x = ma$x)
   return(a)
 }
+
+#' @name sparse-add
+#' @rdname sparse-add
+#' @description I created a function called sparse_add to perform
+#' "sparse.matrix" addition.
+#' @param e1 a sparse.matrix object
+#' @param e2 a sparse.matrix object
+#' @return A sparse.matrix object
+#' @examples
+#' sm <- sparse.matrix(i = c(1, 2), j = c(1, 1), x = c(1, 1), dims = c(2, 2))
+#' sparse_add(sm, sm)
 #' @export
 sparse_add <- function(e1, e2){
   if (!all(e1@dims == e2@dims))
@@ -52,8 +62,27 @@ sparse_add <- function(e1, e2){
   z <- sparse.matrix(i = c$i, j = c$j, x = c$x, dims = e1@dims)
   return(z)
 }
+
+#' @name sparse-add-method
+#' @rdname sparse-add-method
+#' @description I set a method '+' by using sparse_add.
+#' @importFrom methods new
+#' @examples
+#' sm <- sparse.matrix(i = c(1, 2), j = c(1, 1), x = c(1, 1), dims = c(2, 2))
+#' sm + sm
 #' @export
 setMethod("+", signature(e1 = "sparse.matrix", e2 = "sparse.matrix"), sparse_add)
+
+#' @name sparse-multiply
+#' @rdname sparse-multiply
+#' @description I created a function called sparse_multiply to perform
+#' "sparse.matrix" multiplication.
+#' @param x a sparse.matrix object
+#' @param y a sparse.matrix object
+#' @return A sparse.matrix object
+#' @examples
+#' sm <- sparse.matrix(i = c(1, 2), j = c(1, 1), x = c(1, 1), dims = c(2, 2))
+#' sparse_multiply(sm, sm)
 #' @export
 sparse_multiply <- function(x, y){
   if (x@dims[2] != y@dims[1])
@@ -71,12 +100,38 @@ sparse_multiply <- function(x, y){
       }
   return(m)
 }
+
+#' @name sparse-multiply-method
+#' @rdname sparse-multiply-method
+#' @description I set a method '%*%' by using sparse_multiply.
+#' @importFrom methods new
+#' @examples
+#' sm <- sparse.matrix(i = c(1, 2), j = c(1, 1), x = c(1, 1), dims = c(2, 2))
+#' sm %*% sm
 #' @export
 setMethod("%*%", signature(x = "sparse.matrix", y = "sparse.matrix"), sparse_multiply)
+
+#' @name sparse-transpose
+#' @rdname sparse-transpose
+#' @description I created a function called sparse_transpose to perform
+#' "sparse.matrix" transpose.
+#' @param x a sparse.matrix object
+#' @return A sparse.matrix object
+#' @examples
+#' sm <- sparse.matrix(i = c(1, 2), j = c(1, 1), x = c(1, 1), dims = c(2, 2))
+#' sparse_transpose(sm)
 #' @export
-sparse_tranpose <- function(x){
+sparse_transpose <- function(x){
   dims <- c(x@dims[2], x@dims[1])
   z <- sparse.matrix(i = x@j, j = x@i, x = x@x, dims = dims)
 }
+
+#' @name sparse-transpose-method
+#' @rdname sparse-transpose-method
+#' @description I set a method '%*%' by using sparse_multiply.
+#' @importFrom methods new
+#' @examples
+#' sm <- sparse.matrix(i = c(1, 2), j = c(1, 1), x = c(1, 1), dims = c(2, 2))
+#' t(sm)
 #' @export
-setMethod("t", "sparse.matrix", sparse_tranpose)
+setMethod("t", "sparse.matrix", sparse_transpose)
