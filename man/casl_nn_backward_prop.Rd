@@ -7,17 +7,17 @@
 casl_nn_backward_prop(x, y, weights, f_obj, sigma_p, f_p)
 }
 \arguments{
-\item{x:}{A numeric vector representing one row of the input.}
+\item{x}{A numeric vector representing one row of the input.}
 
-\item{y:}{A numeric vector representing one row of the response.}
+\item{y}{A numeric vector representing one row of the response.}
 
-\item{weights:}{A list created by casl_nn_make_weights.}
+\item{weights}{A list created by casl_nn_make_weights.}
 
-\item{f_obj:}{Output of the function casl_nn_forward_prop.}
+\item{f_obj}{Output of the function casl_nn_forward_prop.}
 
-\item{sigma_p:}{Derivative of the activation function.}
+\item{sigma_p}{Derivative of the activation function.}
 
-\item{f_p:}{Derivative of the loss function.}
+\item{f_p}{Derivative of the loss function.}
 }
 \value{
 A list containing the derivative of the loss function
