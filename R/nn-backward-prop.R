@@ -1,12 +1,12 @@
 #' Apply backward propagation algorithm.
 #'
 #' @description Backward propagation.
-#' @param x: A numeric vector representing one row of the input.
-#' @param y: A numeric vector representing one row of the response.
-#' @param weights: A list created by casl_nn_make_weights.
-#' @param f_obj: Output of the function casl_nn_forward_prop.
-#' @param sigma_p: Derivative of the activation function.
-#' @param f_p: Derivative of the loss function.
+#' @param x A numeric vector representing one row of the input.
+#' @param y A numeric vector representing one row of the response.
+#' @param weights A list created by casl_nn_make_weights.
+#' @param f_obj Output of the function casl_nn_forward_prop.
+#' @param sigma_p Derivative of the activation function.
+#' @param f_p Derivative of the loss function.
 #' @return A list containing the derivative of the loss function
 #' with respect to z (grad_z) and w (grad_w).
 #' @export
