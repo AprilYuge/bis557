@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Yuge Wang" />
+
+<meta name="date" content="2018-12-17" />
+
+<title>Homework 5</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework 5</h1>
+<h4 class="author"><em>Yuge Wang</em></h4>
+<h4 class="date"><em>2018-12-17</em></h4>
+
+
+
+<div id="mnist-data-set-by-lasso-and-convolutional-neural-network." class="section level2">
+<h2>1. MNIST Data Set by LASSO and Convolutional Neural Network.</h2>
+<p>In class, LASSO was used for the prediction of hand-writing characters in the MINST data set. Codes are shown in the code chunk below. I only used 1000 samples for training and 10000 for testing. The prediction accuracy for the training set is 0.988, and for the testing set is 0.8469.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(glmnet)
+<span class="kw">library</span>(keras)
+
+<span class="co"># Get 1000 samples from the training set for training. </span>
+mnist &lt;-<span class="st"> </span><span class="kw">dataset_mnist</span>()
+n_train &lt;-<span class="st"> </span><span class="kw">nrow</span>(mnist<span class="op">$</span>train<span class="op">$</span>x)
+s &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq_len</span>(n_train), <span class="dv">1000</span>)
+
+<span class="co"># Get the training set</span>
+x_train &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(mnist<span class="op">$</span>train<span class="op">$</span>x[s,,], <span class="kw">c</span>(<span class="dv">60000</span>, <span class="dv">28</span><span class="op">^</span><span class="dv">2</span>))<span class="op">/</span><span class="dv">255</span>
+y_train &lt;-<span class="st"> </span><span class="kw">factor</span>(mnist<span class="op">$</span>train<span class="op">$</span>y[s])
+
+<span class="co"># Get the testing set</span>
+x_test &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(mnist<span class="op">$</span>test<span class="op">$</span>x, <span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">28</span><span class="op">^</span><span class="dv">2</span>))<span class="op">/</span><span class="dv">255</span>
+y_test &lt;-<span class="st"> </span><span class="kw">factor</span>(mnist<span class="op">$</span>test<span class="op">$</span>y)
+
+<span class="co"># Fit the LASSO model</span>
+fit &lt;-<span class="st"> </span><span class="kw">cv.glmnet</span>(x_train, y_train, <span class="dt">family =</span> <span class="st">&quot;multinomial&quot;</span>)
+
+<span class="co"># Get prediction accuracy of the training set</span>
+pred_train &lt;-<span class="st"> </span><span class="kw">predict</span>(fit<span class="op">$</span>glmnet.fit, x_train, <span class="dt">s =</span> fit<span class="op">$</span>lambda.min, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
+t_train &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">as.vector</span>(pred_train), y_train)
+<span class="kw">sum</span>(<span class="kw">diag</span>(t_train))<span class="op">/</span><span class="kw">sum</span>(t_train)
+
+<span class="co"># Get prediction accuracy of the testing set</span>
+pred_test &lt;-<span class="st"> </span><span class="kw">predict</span>(fit<span class="op">$</span>glmnet.fit, x_test, <span class="dt">s =</span> fit<span class="op">$</span>lambda.min, <span class="dt">type =</span> <span class="st">&quot;class&quot;</span>)
+t_test &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">as.vector</span>(pred_test), y_test)
+<span class="kw">sum</span>(<span class="kw">diag</span>(t_test))<span class="op">/</span><span class="kw">sum</span>(t_test)</code></pre></div>
+<p>As we can see in the LASSO model, the performance is not good enough in the testing set, because we only used information from each pixel. If we can extract more features by combining adjacent pixels, the prediction accuracy should be improved. So, I used convolutional neural network (CNN) to train a model. Codes for CNN are shown below. The same training and testing sets as that in the LASSO model were used. The prediction accuracy for the training set is 0.986, and for the testing set is 0.9479. So, with more features extracted by CNN, the prediction accuracy of the testing set was significantly improved.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Some parameters</span>
+batch_size &lt;-<span class="st"> </span><span class="dv">2</span>
+num_classes &lt;-<span class="st"> </span><span class="dv">10</span>
+epochs &lt;-<span class="st"> </span><span class="dv">10</span>
+
+<span class="co"># Get the training set</span>
+x_train &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(mnist<span class="op">$</span>train<span class="op">$</span>x[s,,], <span class="kw">c</span>(<span class="kw">length</span>(s), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))<span class="op">/</span><span class="dv">255</span>
+y_train &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(mnist<span class="op">$</span>train<span class="op">$</span>y[s], num_classes)
+
+<span class="co"># Get the testing set</span>
+x_test &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(mnist<span class="op">$</span>test<span class="op">$</span>x, <span class="kw">c</span>(<span class="kw">nrow</span>(mnist<span class="op">$</span>test<span class="op">$</span>x), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))<span class="op">/</span><span class="dv">255</span>
+y_test &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(mnist<span class="op">$</span>test<span class="op">$</span>y, num_classes)
+
+<span class="co"># Define model</span>
+model &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()
+
+model <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span>,<span class="dv">28</span>,<span class="dv">1</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_flatten</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">128</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> num_classes) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>)
+
+<span class="co"># Compile model</span>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(
+  <span class="dt">loss =</span> loss_categorical_crossentropy,
+  <span class="dt">optimizer =</span> <span class="kw">optimizer_adadelta</span>(),
+  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>)
+)
+
+<span class="co"># Train model</span>
+model <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fit</span>(
+  x_train, y_train,
+  <span class="dt">batch_size =</span> batch_size,
+  <span class="dt">epochs =</span> epochs,
+  <span class="dt">validation_split =</span> <span class="fl">0.1</span>
+)
+
+<span class="co"># Get prediction accuracy of the training set</span>
+pred_train &lt;-<span class="st"> </span><span class="kw">predict_classes</span>(model, x_train)
+<span class="kw">sum</span>(pred_train <span class="op">==</span><span class="st"> </span>mnist<span class="op">$</span>train<span class="op">$</span>y[s])<span class="op">/</span><span class="kw">length</span>(s)
+
+<span class="co"># Get prediction accuracy of the testing set</span>
+pred_test &lt;-<span class="st"> </span><span class="kw">predict_classes</span>(model, x_test)
+<span class="kw">sum</span>(pred_test <span class="op">==</span><span class="st"> </span>mnist<span class="op">$</span>test<span class="op">$</span>y)<span class="op">/</span><span class="kw">length</span>(mnist<span class="op">$</span>test<span class="op">$</span>y)</code></pre></div>
+</div>
+<div id="casl-number-4-in-exercises-8.11" class="section level2">
+<h2>2. CASL Number 4 in Exercises 8.11</h2>
+<p>To improve the prediction accuracy of the CNN for the EMNIST data set in Section 8.10.4, I modified several parameters. There are four models for comparison and all of them are listed in the code chunk below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(keras)
+
+<span class="co"># Load the EMNIST data set</span>
+<span class="kw">load</span>(<span class="st">&quot;x_28.Rdata&quot;</span>)
+<span class="kw">load</span>(<span class="st">&quot;emnist.Rdata&quot;</span>)
+
+<span class="co"># Get the training and testing sets</span>
+X &lt;-<span class="st"> </span><span class="kw">array_reshape</span>(x_<span class="dv">28</span>, <span class="kw">c</span>(<span class="kw">nrow</span>(emnist), <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>))<span class="op">/</span><span class="dv">255</span>
+Y &lt;-<span class="st"> </span><span class="kw">to_categorical</span>(emnist<span class="op">$</span>class, <span class="dt">num_classes=</span>26L)
+X_train &lt;-<span class="st"> </span>X[emnist<span class="op">$</span>train_id <span class="op">==</span><span class="st"> &quot;train&quot;</span>,,,,drop=<span class="ot">FALSE</span>]
+X_valid &lt;-<span class="st"> </span>X[emnist<span class="op">$</span>train_id <span class="op">!=</span><span class="st"> &quot;train&quot;</span>,,,,drop=<span class="ot">FALSE</span>]
+Y_train &lt;-<span class="st"> </span>Y[emnist<span class="op">$</span>train_id <span class="op">==</span><span class="st"> &quot;train&quot;</span>,]
+Y_valid &lt;-<span class="st"> </span>Y[emnist<span class="op">$</span>train_id <span class="op">!=</span><span class="st"> &quot;train&quot;</span>,]
+
+<span class="co"># Model 1</span>
+model1 &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()
+
+model1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span>,<span class="dv">28</span>,<span class="dv">1</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_flatten</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">128</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">128</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">26</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>)
+
+model1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(<span class="dt">loss =</span> loss_categorical_crossentropy,
+                  <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(),
+                  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>))
+
+history1 &lt;-<span class="st"> </span>model1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fit</span>(X_train, Y_train, <span class="dt">batch_size =</span> <span class="dv">128</span>, <span class="dt">epochs =</span> <span class="dv">2</span>,
+      <span class="dt">validation_data =</span> <span class="kw">list</span>(X_valid, Y_valid))
+
+<span class="co"># Get the prediction accuracy for training and testing sets</span>
+emnist<span class="op">$</span>predict1 &lt;-<span class="st"> </span><span class="kw">predict_classes</span>(model1, X)
+<span class="kw">tapply</span>(emnist<span class="op">$</span>predict1 <span class="op">==</span><span class="st"> </span>emnist<span class="op">$</span>class, emnist<span class="op">$</span>train_id, mean)
+
+<span class="co"># Model 2</span>
+model2 &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()
+
+model2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span>,<span class="dv">28</span>,<span class="dv">1</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">32</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_flatten</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">128</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">128</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">26</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>)
+
+model2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(<span class="dt">loss =</span> loss_categorical_crossentropy,
+                  <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(),
+                  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>))
+
+history2 &lt;-<span class="st"> </span>model2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fit</span>(X_train, Y_train, <span class="dt">batch_size =</span> <span class="dv">128</span>, <span class="dt">epochs =</span> <span class="dv">2</span>,
+      <span class="dt">validation_data =</span> <span class="kw">list</span>(X_valid, Y_valid))
+
+<span class="co"># Get the prediction accuracy for training and testing sets</span>
+emnist<span class="op">$</span>predict2 &lt;-<span class="st"> </span><span class="kw">predict_classes</span>(model2, X)
+<span class="kw">tapply</span>(emnist<span class="op">$</span>predict2 <span class="op">==</span><span class="st"> </span>emnist<span class="op">$</span>class, emnist<span class="op">$</span>train_id, mean)
+
+<span class="co"># Model 3</span>
+model3 &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()
+
+model3 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span>,<span class="dv">28</span>,<span class="dv">1</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_flatten</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">128</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">128</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">26</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>)
+
+model3 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(<span class="dt">loss =</span> loss_categorical_crossentropy,
+                  <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(),
+                  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>))
+
+history3 &lt;-<span class="st"> </span>model3 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fit</span>(X_train, Y_train, <span class="dt">batch_size =</span> <span class="dv">128</span>, <span class="dt">epochs =</span> <span class="dv">2</span>,
+      <span class="dt">validation_data =</span> <span class="kw">list</span>(X_valid, Y_valid))
+
+<span class="co"># Get the prediction accuracy for training and testing sets</span>
+emnist<span class="op">$</span>predict3 &lt;-<span class="st"> </span><span class="kw">predict_classes</span>(model3, X)
+<span class="kw">tapply</span>(emnist<span class="op">$</span>predict3 <span class="op">==</span><span class="st"> </span>emnist<span class="op">$</span>class, emnist<span class="op">$</span>train_id, mean)
+
+<span class="co"># Model 4</span>
+model4 &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>()
+
+model4 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span>,<span class="dv">28</span>,<span class="dv">1</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_conv_2d</span>(<span class="dt">filters =</span> <span class="dv">64</span>, <span class="dt">kernel_size =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>),
+                <span class="dt">padding =</span> <span class="st">&quot;same&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_max_pooling_2d</span>(<span class="dt">pool_size =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_flatten</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">256</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">256</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dropout</span>(<span class="dt">rate =</span> <span class="fl">0.5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">26</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">layer_activation</span>(<span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>)
+
+model4 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">compile</span>(<span class="dt">loss =</span> loss_categorical_crossentropy,
+                   <span class="dt">optimizer =</span> <span class="kw">optimizer_rmsprop</span>(),
+                   <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">'accuracy'</span>))
+
+history4 &lt;-<span class="st"> </span>model4 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fit</span>(X_train, Y_train, <span class="dt">batch_size =</span> <span class="dv">128</span>, <span class="dt">epochs =</span> <span class="dv">2</span>,
+      <span class="dt">validation_data =</span> <span class="kw">list</span>(X_valid, Y_valid))
+
+<span class="co"># Get the prediction accuracy for training and testing sets</span>
+emnist<span class="op">$</span>predict4 &lt;-<span class="st"> </span><span class="kw">predict_classes</span>(model3, X)
+<span class="kw">tapply</span>(emnist<span class="op">$</span>predict4 <span class="op">==</span><span class="st"> </span>emnist<span class="op">$</span>class, emnist<span class="op">$</span>train_id, mean)</code></pre></div>
+<p>The first model is the original model in Section 8.10.4. In the second one, I changed the kernel size in each convolutional layer to 3*3. In the third one, I changed the number of filters in each convolutional layer to 64 based on the second model. In the last one, I further changed the number of nodes in each dense layer except the last one to 256. For each model, I only ran 2 epochs, and the batch sizes are all 128. The prediction accuracy of training and testing sets for each model is listed in the table below.</p>
+<table>
+<caption>Table1: Prediction Accuracy for each Model</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Model 1</th>
+<th align="right">Model 2</th>
+<th align="right">Model 3</th>
+<th align="right">Model 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>train</td>
+<td align="right">0.8870</td>
+<td align="right">0.9009</td>
+<td align="right">0.9205</td>
+<td align="right">0.9318</td>
+</tr>
+<tr class="even">
+<td>test</td>
+<td align="right">0.8837</td>
+<td align="right">0.8999</td>
+<td align="right">0.9175</td>
+<td align="right">0.9273</td>
+</tr>
+</tbody>
+</table>
+<p>As shown in the table, the accuracy or the classification rate was improved by each modification I made. And it was the highest for the last model which had the most complicated structure.</p>
+</div>
+<div id="casl-number-8-in-exercises-8.11" class="section level2">
+<h2>3. CASL Number 8 in Exercises 8.11</h2>
+<p>When using the mean absolute error (MAE), the loss function is <span class="math inline">\(f(a)=|a-y|\)</span>, so the derivate of the loss function with respect to <span class="math inline">\(a\)</span> is <span class="math display">\[
+\begin{equation}
+f'(a)=
+\left\{
+    \begin{array}{lr}
+      1, &amp; if \quad a&gt;y  \\
+      -1, &amp; if \quad a&lt;y
+    \end{array}
+\right.
+\end{equation}
+\]</span></p>
+<p>The function that returns the derivative of the loss function is</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">casl_util_mae_p &lt;-<span class="st"> </span><span class="cf">function</span>(y, a){
+  <span class="cf">if</span> (a <span class="op">&gt;</span><span class="st"> </span>y)
+    <span class="dv">1</span>
+  <span class="cf">else</span>
+    <span class="op">-</span><span class="dv">1</span>
+}</code></pre></div>
+<p>Next, I wrote a function called “casl_nn_sgd_mae” which used MAE as the loss function to update the weights by modifying the function “casl_nn_sgd” in our textbook. And I rename the function “casl_nn_sgd” to “casl_nn_sgd_mse”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">casl_nn_sgd_mae &lt;-<span class="st"> </span><span class="cf">function</span>(X, y, sizes, epochs, eta, <span class="dt">weights=</span><span class="ot">NULL</span>){
+  <span class="cf">if</span> (<span class="kw">is.null</span>(weights))
+  {
+    weights &lt;-<span class="st"> </span><span class="kw">casl_nn_make_weights</span>(sizes)
+  }
+  <span class="cf">for</span> (epoch <span class="cf">in</span> <span class="kw">seq_len</span>(epochs))
+  {
+    <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">nrow</span>(X)))
+    {
+      f_obj &lt;-<span class="st"> </span><span class="kw">casl_nn_forward_prop</span>(X[i,], weights,
+                                    casl_util_ReLU)
+      b_obj &lt;-<span class="st"> </span><span class="kw">casl_nn_backward_prop</span>(X[i,], y[i,], weights,
+                                     f_obj, casl_util_ReLU_p,
+                                     casl_util_mae_p)
+      <span class="cf">for</span> (j <span class="cf">in</span> <span class="kw">seq_along</span>(b_obj))
+      {
+        weights[[j]]<span class="op">$</span>b &lt;-<span class="st"> </span>weights[[j]]<span class="op">$</span>b <span class="op">-</span>
+<span class="st">          </span>eta <span class="op">*</span><span class="st"> </span>b_obj<span class="op">$</span>grad_z[[j]]
+        weights[[j]]<span class="op">$</span>w &lt;-<span class="st"> </span>weights[[j]]<span class="op">$</span>w <span class="op">-</span>
+<span class="st">          </span>eta <span class="op">*</span><span class="st"> </span>b_obj<span class="op">$</span>grad_w[[j]]
+      }
+    }
+  }
+  weights
+}</code></pre></div>
+<p>I put “casl_util_mae_p”, “casl_nn_sgd_mae”, “casl_nn_sgd_mse” and all the other functions in our textbook as building blocks for the dense neural network to bis557 R package.</p>
+<p>Now, let’s see how SGD performs differently on data with several outliers by using MSE and MAE as loss functions respectively. In the following codes, I generated 50 samples with 5 outliers as the training set, and 50 samples without outliers as the testing set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bis557)
+
+<span class="kw">set.seed</span>(<span class="dv">222</span>)
+
+<span class="co"># Simulate some data for training</span>
+n &lt;-<span class="st"> </span><span class="dv">50</span>
+X_train &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> n))
+y_train &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>X_train <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">sd =</span> <span class="fl">0.3</span>)
+
+<span class="co"># Pick some data as outliers</span>
+y_train[<span class="dv">3</span>] &lt;-<span class="st"> </span>y_train[<span class="dv">3</span>] <span class="op">-</span><span class="st"> </span><span class="dv">7</span>
+y_train[<span class="dv">10</span>] &lt;-<span class="st"> </span>y_train[<span class="dv">10</span>] <span class="op">-</span><span class="st"> </span><span class="dv">5</span>
+y_train[<span class="dv">22</span>] &lt;-<span class="st"> </span>y_train[<span class="dv">22</span>] <span class="op">-</span><span class="st"> </span><span class="dv">4</span>
+y_train[<span class="dv">35</span>] &lt;-<span class="st"> </span>y_train[<span class="dv">35</span>] <span class="op">+</span><span class="st"> </span><span class="fl">3.5</span>
+y_train[<span class="dv">44</span>] &lt;-<span class="st"> </span>y_train[<span class="dv">44</span>] <span class="op">+</span><span class="st"> </span><span class="dv">6</span>
+
+<span class="co"># Simulate some data for testing</span>
+X_test &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(n, <span class="dt">min=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">max=</span><span class="dv">1</span>), <span class="dt">ncol=</span><span class="dv">1</span>)
+y_test &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>X_test <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">sd =</span> <span class="fl">0.3</span>)
+
+<span class="co"># SGD with MSE as the loss function</span>
+weights_mse &lt;-<span class="st"> </span><span class="kw">casl_nn_sgd_mse</span>(X_train, y_train, <span class="dt">sizes=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">25</span>, <span class="dv">1</span>),<span class="dt">epochs=</span><span class="dv">25</span>, <span class="dt">eta=</span><span class="fl">0.01</span>)
+<span class="co"># Prediction on the training set</span>
+y_pred_train_mse &lt;-<span class="st"> </span><span class="kw">casl_nn_predict</span>(weights_mse, X_train)
+<span class="co"># Prediction on the testing set</span>
+y_pred_test_mse &lt;-<span class="st"> </span><span class="kw">casl_nn_predict</span>(weights_mse, X_test)
+
+<span class="co"># SGD with MAE as the loss function</span>
+weights_mae &lt;-<span class="st"> </span><span class="kw">casl_nn_sgd_mae</span>(X_train, y_train, <span class="dt">sizes=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">25</span>, <span class="dv">1</span>),<span class="dt">epochs=</span><span class="dv">25</span>, <span class="dt">eta=</span><span class="fl">0.01</span>)
+<span class="co"># Prediction on the training set</span>
+y_pred_train_mae &lt;-<span class="st"> </span><span class="kw">casl_nn_predict</span>(weights_mae, X_train)
+<span class="co"># Prediction on the testing set</span>
+y_pred_test_mae &lt;-<span class="st"> </span><span class="kw">casl_nn_predict</span>(weights_mae, X_test)</code></pre></div>
+<p>In the table below, I listed the MSE and MAE of the training and the testing sets for SGD with two loss functions, respectively. As we can see, in the training set, the MSE is smaller when we used MSE as the loss function, while MAE is smaller when we used MAE as the loss function, which are very natural. However, in the testing set, both MSE and MAE are smaller when MAE was used as the loss function. So, the SGD with MAE could give us more robust results when there are outliers.</p>
+<table>
+<caption>Table 2: Results Somparison for Two Loss Functions</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Loss Function: MSE</th>
+<th align="right">Loss Function: MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Train MSE</td>
+<td align="right">2.5117844</td>
+<td align="right">2.7655943</td>
+</tr>
+<tr class="even">
+<td>Train MAE</td>
+<td align="right">0.8855782</td>
+<td align="right">0.7214311</td>
+</tr>
+<tr class="odd">
+<td>Test MSE</td>
+<td align="right">0.2806240</td>
+<td align="right">0.1041030</td>
+</tr>
+<tr class="even">
+<td>Test MAE</td>
+<td align="right">0.4493660</td>
+<td align="right">0.2392225</td>
+</tr>
+</tbody>
+</table>
+<p>Also, we can visualize the prediction on the training and the testing sets with two different loss functions.</p>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
