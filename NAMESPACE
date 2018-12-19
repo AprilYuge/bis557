@@ -2,6 +2,7 @@
 
 export(casl_nn_backward_prop)
 export(casl_nn_forward_prop)
+export(casl_nn_make_weights)
 export(casl_nn_predict)
 export(casl_util_ReLU)
 export(casl_util_ReLU_p)
@@ -15,3 +16,4 @@ importFrom(methods,new)
 importFrom(stats,.getXlevels)
 importFrom(stats,model.frame)
 importFrom(stats,model.matrix)
+importFrom(stats,rnorm)
