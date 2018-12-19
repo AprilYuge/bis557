@@ -320,81 +320,79 @@ kable(acc, caption = "Table1: Prediction Accuracy for each Model")
 #    weights
 #  }
 
-## ------------------------------------------------------------------------
-library(bis557)
-
-set.seed(222)
-
-# Simulate some data for training
-n <- 50
-X_train <- matrix(seq(-1, 1, length.out = n))
-y_train <- 2*X_train + 3 + rnorm(n, sd = 0.3)
-
-# Pick some data as outliers
-y_train[3] <- y_train[3] - 7
-y_train[10] <- y_train[10] - 5
-y_train[22] <- y_train[22] - 4
-y_train[35] <- y_train[35] + 3.5
-y_train[44] <- y_train[44] + 6
-
-# Simulate some data for testing
-X_test <- matrix(runif(n, min=-1, max=1), ncol=1)
-y_test <- 2*X_test + 3 + rnorm(n, sd = 0.3)
-
-# SGD with MSE as the loss function
-weights_mse <- casl_nn_sgd_mse(X_train, y_train, sizes=c(1, 25, 1),epochs=25, eta=0.01)
-# Prediction on the training set
-y_pred_train_mse <- casl_nn_predict(weights_mse, X_train)
-# Prediction on the testing set
-y_pred_test_mse <- casl_nn_predict(weights_mse, X_test)
-
-# SGD with MAE as the loss function
-weights_mae <- casl_nn_sgd_mae(X_train, y_train, sizes=c(1, 25, 1),epochs=25, eta=0.01)
-# Prediction on the training set
-y_pred_train_mae <- casl_nn_predict(weights_mae, X_train)
-# Prediction on the testing set
-y_pred_test_mae <- casl_nn_predict(weights_mae, X_test)
+## ---- eval=FALSE---------------------------------------------------------
+#  library(bis557)
+#  
+#  set.seed(222)
+#  
+#  # Simulate some data for training
+#  n <- 50
+#  X_train <- matrix(seq(-1, 1, length.out = n))
+#  y_train <- 2*X_train + 3 + rnorm(n, sd = 0.3)
+#  
+#  # Pick some data as outliers
+#  y_train[3] <- y_train[3] - 7
+#  y_train[10] <- y_train[10] - 5
+#  y_train[22] <- y_train[22] - 4
+#  y_train[35] <- y_train[35] + 3.5
+#  y_train[44] <- y_train[44] + 6
+#  
+#  # Simulate some data for testing
+#  X_test <- matrix(runif(n, min=-1, max=1), ncol=1)
+#  y_test <- 2*X_test + 3 + rnorm(n, sd = 0.3)
+#  
+#  # SGD with MSE as the loss function
+#  weights_mse <- casl_nn_sgd_mse(X_train, y_train, sizes=c(1, 25, 1),epochs=25, eta=0.01)
+#  # Prediction on the training set
+#  y_pred_train_mse <- casl_nn_predict(weights_mse, X_train)
+#  # Prediction on the testing set
+#  y_pred_test_mse <- casl_nn_predict(weights_mse, X_test)
+#  
+#  # SGD with MAE as the loss function
+#  weights_mae <- casl_nn_sgd_mae(X_train, y_train, sizes=c(1, 25, 1),epochs=25, eta=0.01)
+#  # Prediction on the training set
+#  y_pred_train_mae <- casl_nn_predict(weights_mae, X_train)
+#  # Prediction on the testing set
+#  y_pred_test_mae <- casl_nn_predict(weights_mae, X_test)
+#  
+#  # Compare the performance
+#  # MSE of the training set with MSE as the loss function
+#  mse_train_mse <- mean((y_pred_train_mse - y_train)^2)
+#  # MAE of the training set with MSE as the loss function
+#  mae_train_mse <- mean(abs(y_pred_train_mse - y_train))
+#  # MSE of the testing set with MSE as the loss function
+#  mse_test_mse <- mean((y_pred_test_mse - y_test)^2)
+#  # MAE of the testing set with MSE as the loss function
+#  mae_test_mse <- mean(abs(y_pred_test_mse - y_test))
+#  
+#  # MSE of the training set with MAE as the loss function
+#  mse_train_mae <- mean((y_pred_train_mae - y_train)^2)
+#  # MAE of the training set with MAE as the loss function
+#  mae_train_mae <- mean(abs(y_pred_train_mae - y_train))
+#  # MSE of the testing set with MAE as the loss function
+#  mse_test_mae <- mean((y_pred_test_mae - y_test)^2)
+#  # MAE of the testing set with MAE as the loss function
+#  mae_test_mae <- mean(abs(y_pred_test_mae - y_test))
 
 ## ---- echo=FALSE---------------------------------------------------------
 library(knitr)
-
-# Compare the performance
-# MSE of the training set with MSE as the loss function
-mse_train_mse <- mean((y_pred_train_mse - y_train)^2)
-# MAE of the training set with MSE as the loss function
-mae_train_mse <- mean(abs(y_pred_train_mse - y_train))
-# MSE of the testing set with MSE as the loss function
-mse_test_mse <- mean((y_pred_test_mse - y_test)^2)
-# MAE of the testing set with MSE as the loss function
-mae_test_mse <- mean(abs(y_pred_test_mse - y_test))
-
-# MSE of the training set with MAE as the loss function
-mse_train_mae <- mean((y_pred_train_mae - y_train)^2)
-# MAE of the training set with MAE as the loss function
-mae_train_mae <- mean(abs(y_pred_train_mae - y_train))
-# MSE of the testing set with MAE as the loss function
-mse_test_mae <- mean((y_pred_test_mae - y_test)^2)
-# MAE of the testing set with MAE as the loss function
-mae_test_mae <- mean(abs(y_pred_test_mae - y_test))
-
-result <- matrix(c(mse_train_mse, mae_train_mse, mse_test_mse, mae_test_mse,
-                   mse_train_mae, mae_train_mae, mse_test_mae, mae_test_mae), ncol = 2)
+result <- matrix(c(2.5118, 0.8856, 0.2806, 0.4494, 2.7656, 0.7214, 0.1041, 0.2392), ncol = 2)
 colnames(result) <- c("Loss Function: MSE", "Loss Function: MAE")
 rownames(result) <- c("Train MSE", "Train MAE", "Test MSE", "Test MAE")
 kable(result, caption = "Table 2: Results Somparison for Two Loss Functions")
 
-## ---- echo=FALSE---------------------------------------------------------
-plot(X_train, y_train)
-lines(X_train, y_pred_train_mse, col=1)
-lines(X_train, y_pred_train_mae, col=2)
-title("Prediction on the Training Set")
-legend("topleft", lty = c(1,1), col = c(1,2), 
-       legend = c("MSE", "MAE"), title = "Loss Function")
-
-plot(X_test,y_test)
-lines(X_test[order(X_test)], y_pred_test_mse[order(X_test)], col=1)
-lines(X_test[order(X_test)], y_pred_test_mae[order(X_test)], col=2)
-title("Prediction on the Testing Set")
-legend("topleft", lty = c(1,1), col = c(1,2), 
-       legend = c("MSE", "MAE"), title = "Loss Function")
+## ---- eval=FALSE, echo=FALSE---------------------------------------------
+#  plot(X_train, y_train)
+#  lines(X_train, y_pred_train_mse, col=1)
+#  lines(X_train, y_pred_train_mae, col=2)
+#  title("Prediction on the Training Set")
+#  legend("topleft", lty = c(1,1), col = c(1,2),
+#         legend = c("MSE", "MAE"), title = "Loss Function")
+#  
+#  plot(X_test,y_test)
+#  lines(X_test[order(X_test)], y_pred_test_mse[order(X_test)], col=1)
+#  lines(X_test[order(X_test)], y_pred_test_mae[order(X_test)], col=2)
+#  title("Prediction on the Testing Set")
+#  legend("topleft", lty = c(1,1), col = c(1,2),
+#         legend = c("MSE", "MAE"), title = "Loss Function")
 
