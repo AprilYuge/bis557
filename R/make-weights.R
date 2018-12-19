@@ -5,6 +5,8 @@
 #' @param sizes A vector giving the size of each layer, including 
 #' the input and output layers.
 #' @return A list containing initialized weights and biases.
+#' @importFrom stats rnorm
+#' @export
 casl_nn_make_weights <- function(sizes){
   L <- length(sizes) - 1L
   weights <- vector("list", L)
